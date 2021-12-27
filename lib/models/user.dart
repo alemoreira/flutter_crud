@@ -5,7 +5,7 @@ class User {
   final String avatarUrl;
 
   const User(
-      {this.id = '0',
+      {this.id = '',
       required this.name,
       required this.email,
       required this.avatarUrl});

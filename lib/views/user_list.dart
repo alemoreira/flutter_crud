@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_crud/components/user_tile.dart';
+import 'package:flutter_crud/models/user.dart';
 import 'package:flutter_crud/provider/users.dart';
 import 'package:flutter_crud/route/routes.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +18,14 @@ class UserList extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             onPressed: () {
-              Navigator.of(context).pushNamed(Routes.USER_FORM);
+              Navigator.of(context).pushNamed(
+                Routes.userForm,
+                arguments: const User(
+                  name: '',
+                  email: '',
+                  avatarUrl: '',
+                ),
+              );
             },
             icon: const Icon(Icons.add),
           )
@@ -25,7 +33,7 @@ class UserList extends StatelessWidget {
       ),
       body: ListView.builder(
         itemCount: users.count,
-        itemBuilder: (ctx, i) => UserTile(users.one(i)),
+        itemBuilder: (ctx, i) => UserTile(user: users.one(i)),
       ),
     );
   }

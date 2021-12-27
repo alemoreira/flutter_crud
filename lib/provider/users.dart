@@ -20,15 +20,20 @@ class Users with ChangeNotifier {
   }
 
   void put(User user) {
-    if (user == null) {
-      return;
-    }
+    // if (user == null) {
+    //   return;
+    // }
 
     // update
-    if (user.id != null &&
-        user.id.trim().isNotEmpty &&
-        _items.containsKey(user.id)) {
-      _items.update(user.id, (_) => user);
+    if (user.id.trim().isNotEmpty && _items.containsKey(user.id)) {
+      _items.update(
+          user.id,
+          (_) => User(
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                avatarUrl: user.avatarUrl,
+              ));
     } else {
       // create
       final id = Random().nextDouble().toString();
@@ -46,8 +51,9 @@ class Users with ChangeNotifier {
   }
 
   void delete(User user) {
-    if (user != null && user.id != null) {
-      _items.remove(user.id);
-    }
+    // if (user != null && user.id != null) {
+    _items.remove(user.id);
+    notifyListeners();
+    // }
   }
 }
